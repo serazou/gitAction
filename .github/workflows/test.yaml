@@ -5,9 +5,19 @@ jobs:
     Explore-GitHub-Actions:
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v3
-            - run: echo "🎉 The job was automatically triggered by a ${{ github.event-name }} event."
-            - run: python -m venv venv
-            - run: source venv/bin/activate
-            - run: pip install -r requirements.txt
-            - run: python src/use.py 52.95.110.1
+            - name: Checkout code
+              uses: actions/checkout@v3
+
+            - name: Set up Python 3.9
+              uses: actions/setup-python@v4
+              with:
+                  python-version: '3.9'
+
+            - name: Create and use virtual environment + install deps + run script
+              run: |
+                  python -m venv venv
+                  source venv/bin/activate
+                  python -m pip install --upgrade pip
+                  pip install -r requirements.txt
+                  python src/use.py 52.95.110.1
+              shell: bash
