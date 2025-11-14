@@ -1,6 +1,7 @@
 import urllib.request
 import json
 import ipaddress
+import ssl
 
 def download_aws_ip_set():
   """Downloads the AWS IP range JSON file and returns it as a dictionary."""
@@ -9,7 +10,10 @@ def download_aws_ip_set():
   aws_ip_range_url = 'https://ip-ranges.amazonaws.com/ip-ranges.json'
 
   # Download the JSON file
-  with urllib.request.urlopen(aws_ip_range_url) as url:
+  ssl_context = ssl.create_default_context()
+  ssl_context.check_hostname = False
+  ssl_context.verify_mode = ssl.CERT_NONE
+  with urllib.request.urlopen(aws_ip_range_url, context=ssl_context) as url:
     aws_ip_range_data = json.load(url)
 
   return aws_ip_range_data['prefixes']
