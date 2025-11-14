@@ -28,3 +28,6 @@ jobs:
 
             - name: Run script
               run: ./venv/bin/python src/use.py 52.95.110.1
+
+            - name: Run tests
+              run: nosetests --with-coverage --cover-package=src tests/
