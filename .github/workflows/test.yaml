@@ -12,7 +12,7 @@ jobs:
               uses: actions/setup-python@v4
               with:
                 python-version: '3.9'
-            - name: Create and use virtual environment + install deps + run script
+            - name: Dependencies installation
               run: |
                   python -m venv venv
                 ./venv/bin/pip install --upgrade pip
