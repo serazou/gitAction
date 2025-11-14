@@ -5,8 +5,9 @@ jobs:
     Explore-GitHub-Actions:
         runs-on: ubuntu-latest
         steps:
+            - uses: actions/checkout@v3
             - run: echo "🎉 The job was automatically triggered by a ${{ github.event-name }} event."
             - run: python -m venv venv
             - run: source venv/bin/activate
-            - run: pip install -r ../../requirements.txt
+            - run: pip install -r requirements.txt
             - run: python src/use.py 52.95.110.1
