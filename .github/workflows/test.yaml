@@ -10,12 +10,13 @@ jobs:
 
             - name: Python 3.9
               uses: actions/setup-python@v4
+              with:
+                python-version: '3.9'
             - name: Create and use virtual environment + install deps + run script
               run: |
                   python -m venv venv
                 ./venv/bin/pip install --upgrade pip
                 ./venv/bin/pip install -r requirements.txt
-                ./venv/bin/pip install flake8
 
             - name: Lint with flake8
               run: ./venv/bin/flake8 .
