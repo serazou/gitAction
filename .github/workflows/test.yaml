@@ -8,7 +8,7 @@ jobs:
             - name: Checkout code
               uses: actions/checkout@v3
 
-            - name: Set up Python 3.9
+            - name: Python 3.9
               uses: actions/setup-python@v4
               with:
                   python-version: '3.9'
@@ -16,8 +16,12 @@ jobs:
             - name: Create and use virtual environment + install deps + run script
               run: |
                   python -m venv venv
-                  source venv/bin/activate
-                  python -m pip install --upgrade pip
-                  pip install -r requirements.txt
-                  python src/use.py 52.95.110.1
-              shell: bash
+                ./venv/bin/pip install --upgrade pip
+                ./venv/bin/pip install -r requirements.txt
+                ./venv/bin/pip install flake8
+
+            - name: Lint with flake8
+              run: ./venv/bin/flake8 .
+
+            - name: Run script
+              run: ./venv/bin/python src/use.py 52.95.110.1
